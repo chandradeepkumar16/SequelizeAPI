@@ -6,17 +6,25 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
+const path = require('path');
 
 require('../config/database');
 
-const userRouter=require('../router')
+const customRouter=require('../router')
 
 // defining the Express app
 const app = express();
+global.__basedir= __dirname
+
+
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
-app.use('/v1' , userRouter);
+app.use(express.static(path.join(__basedir,'public')));
+app.use('/uploads',express.static(path.join(__basedir,'uploads')));
+
+
+app.use('/v1' , customRouter);
 // defining an array to work as the database (temporary solution)
 const ads = [
   {title: 'Hello this side chandradeep kumar!'}

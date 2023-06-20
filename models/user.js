@@ -14,12 +14,16 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   User.init({
-    firstName: DataTypes.STRING,
-    lastName: DataTypes.STRING,
-    email: DataTypes.STRING
+    first_name: DataTypes.STRING,
+    last_name: DataTypes.STRING,
+    email: DataTypes.STRING,
+    created_at :DataTypes.DATE
   }, {
     sequelize,
     modelName: 'User',
+    underscored: true,
+    timestamps: false,
+    tableName: 'users'
   });
   return User;
 };
